@@ -13,6 +13,7 @@ class ArticlePolicy
      */
         public function before(User $user, string $ability): bool|null
     {
+
         if ($user->role === "admin") {
             return true;
         }

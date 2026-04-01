@@ -18,12 +18,14 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
+        if(Auth::user()->role !== "admin"){
+            $articles = Article::where('statut', 'publie')->get();
+        }
         return view("articles.index", compact('articles'));
     }
 
     public function myArticles(){
-        $articles = Article::where('user_id', 2)->get();
-        // dd($articles);
+        $articles = Article::where('user_id', Auth::id())->get();
         return view('articles.my-articles', compact('articles'));
     }
     /**
@@ -44,9 +46,11 @@ class ArticleController extends Controller
         $data = $request->validate([
             'titre' => 'required|max:255',
             'contenu' => 'required',
-            'statut' => 'required|in:brouillon,publie',
         ]);
         $data['user_id'] = Auth::id();
+        if(Auth::user()->role === 'admin'){
+            $data['statut'] = 'publie';
+        }
         Article::create($data);
         return redirect()->route('articles.index')->with('success', 'Article creé avec succès.');
     }
@@ -66,6 +70,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // Gate::authorize('edit_article', $article);
         $this->authorize('update', $article);
         return view('articles.edit', compact('article'));
     }
@@ -79,12 +84,14 @@ class ArticleController extends Controller
         $data = $request->validate([
             'titre' => 'required|max:255',
             'contenu' => 'required',
-            'statut' => 'required|in:brouillon,publie'
         ]);
         $article->update($data);
         return redirect()->route('articles.index')->with('success', 'Article modifié avec succès.');
     }
-
+    public function check(Article $article){
+        $article->update(['statut' => 'publie']);
+        return redirect()->route('articles.index')->with('success', 'Article modifié avec succès.');
+    }
     /**
      * Remove the specified resource from storage.
      */

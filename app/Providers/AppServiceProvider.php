@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view_article', function (User $user, Article $article){
             return $article->user_id === $user->id || $user->role === "admin" || $article->statut === "publie";
         });
+        Gate::define('edit_article', function (User $user, Article $article){
+            return $article->user_id === $user->id || $user->role === "admin";
+        });
     }
 }

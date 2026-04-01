@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- Statut -->
-                    <div>
+                    {{-- <div>
                         <label for="statut" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Statut
                         </label>
@@ -59,7 +59,7 @@
                         @error('statut')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <!-- Buttons -->
                     <div class="flex items-center justify-between pt-4">

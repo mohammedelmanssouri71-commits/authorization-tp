@@ -46,25 +46,39 @@
                             <!-- Actions -->
                             <div class="flex items-center space-x-2">
 
-                                @can('update', $article)
-                                    <a href="{{ route('articles.edit', $article) }}"
-                                    class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded">
-                                        ✏️
-                                    </a>
-                                @endcan
-
-                                @can('delete', $article)
-                                    <form action="{{ route('articles.destroy', $article) }}" method="POST"
-                                      onsubmit="return confirm('Supprimer cet article ?')">
+                                @if ($article->statut === "brouillon")
+                                    <form action="{{ route('check', $article) }}" method="POST"
+                                      onsubmit="return confirm('Valider cet article ?')">
                                         @csrf
-                                        @method('DELETE')
+                                        @method('PUT')
 
                                         <button type="submit"
-                                                class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
-                                            🗑️
+                                                class="px-3 py-1 bg-red-500 hover:bg-red-600 rounded">
+                                            ✔
                                         </button>
                                     </form>
+                                @else
+                                     @can('update', $article)
+                                        <a href="{{ route('articles.edit', $article) }}"
+                                        class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded">
+                                            ✏️
+                                        </a>
+                                    @endcan
+                                @endif
+                                
+                                @can('delete', $article)
+                                        <form action="{{ route('articles.destroy', $article) }}" method="POST"
+                                        onsubmit="return confirm('Supprimer cet article ?')">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit"
+                                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
+                                                🗑️
+                                            </button>
+                                        </form>
                                 @endcan
+                            
 
                             </div>
                         </li>

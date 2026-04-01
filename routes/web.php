@@ -9,6 +9,7 @@ Route::get('/', function () {
 });
 Route::resource('articles', ArticleController::class)->middleware('auth');
 Route::get('/mes-articles', [ArticleController::class, 'myArticles'])->middleware('auth');
+Route::put('/articles/check/{article}', [ArticleController::class, 'check'])->middleware('auth')->name('check');
 
 
 Route::get('/dashboard', function () {
