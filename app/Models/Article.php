@@ -9,6 +9,6 @@ class Article extends Model
     protected $fillable = ['titre', 'contenu', 'statut', 'user_id'];
 
     public function user(){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

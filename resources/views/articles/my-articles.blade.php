@@ -28,6 +28,8 @@
                     @forelse($articles as $article)
                         <li class="flex justify-between items-center border-b pb-3">
 
+        
+
                             <!-- Info -->
                             <div>
                                 <a href="{{ route('articles.show', $article) }}"
@@ -37,7 +39,8 @@
 
                                 <p class="text-sm text-gray-500">
                                     Statut :
-                                    <span>
+                                    <span class="px-2 py-1 rounded text-white
+                                        {{ $article->statut === 'publie' ? 'bg-green-500' : 'bg-yellow-500' }}">
                                         {{ $article->statut }}
                                     </span>
                                 </p>
@@ -46,25 +49,21 @@
                             <!-- Actions -->
                             <div class="flex items-center space-x-2">
 
-                                @can('update', $article)
-                                    <a href="{{ route('articles.edit', $article) }}"
-                                    class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded">
-                                        ✏️
-                                    </a>
-                                @endcan
+                                <a href="{{ route('articles.edit', $article) }}"
+                                   class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded">
+                                    ✏️
+                                </a>
 
-                                @can('delete', $article)
-                                    <form action="{{ route('articles.destroy', $article) }}" method="POST"
+                                <form action="{{ route('articles.destroy', $article) }}" method="POST"
                                       onsubmit="return confirm('Supprimer cet article ?')">
-                                        @csrf
-                                        @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-                                        <button type="submit"
-                                                class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
-                                            🗑️
-                                        </button>
-                                    </form>
-                                @endcan
+                                    <button type="submit"
+                                            class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
+                                        🗑️
+                                    </button>
+                                </form>
 
                             </div>
                         </li>

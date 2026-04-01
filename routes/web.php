@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('articles', ArticleController::class)->middleware('auth');
+Route::get('/mes-articles', [ArticleController::class, 'myArticles'])->middleware('auth');
 
 
 Route::get('/dashboard', function () {

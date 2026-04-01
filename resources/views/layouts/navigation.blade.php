@@ -15,6 +15,16 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- ✅ Lien 1 : Tous les articles --}}
+                    <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
+                        {{ __('Tous les articles') }}
+                    </x-nav-link>
+
+                    {{-- ✅ Lien 2 : Mes articles --}}
+                    <x-nav-link :href="url('/mes-articles')" :active="request()->is('mes-articles')">
+                        {{ __('Mes articles') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +79,16 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+            {{-- ✅ Lien 1 responsive : Tous les articles --}}
+            <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
+                {{ __('Tous les articles') }}
+            </x-responsive-nav-link>
+
+            {{-- ✅ Lien 2 responsive : Mes articles --}}
+            <x-responsive-nav-link :href="url('/mes-articles')" :active="request()->is('mes-articles')">
+                {{ __('Mes articles') }}
             </x-responsive-nav-link>
         </div>
 
