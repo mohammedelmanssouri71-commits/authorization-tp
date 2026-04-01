@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-slate-100 text-slate-800;
+        background-image: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 50%, #f1f5f9 100%);
+    }
+}
+
+@layer components {
+    .page-shell {
+        @apply min-h-screen bg-white/40 backdrop-blur-[1px];
+    }
+
+    .page-header {
+        @apply border-b border-white/60 bg-white/70 shadow-sm backdrop-blur;
+    }
+
+    .surface-card {
+        @apply overflow-hidden rounded-xl border border-slate-200/70 bg-white/90 shadow-lg shadow-slate-200/60;
+    }
+
+    .auth-card {
+        @apply border border-slate-200/70 bg-white/95 shadow-xl shadow-slate-200/70;
+    }
+
+    .top-nav {
+        @apply border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur;
+    }
+}
